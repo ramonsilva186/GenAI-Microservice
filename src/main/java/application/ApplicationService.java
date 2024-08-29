@@ -4,7 +4,11 @@ import application.dto.Customer;
 import application.dto.ProfilePhoto;
 import domain.services.CustomerReadService;
 import domain.services.ProfilePhotoCreateService;
+import jakarta.enterprise.context.ApplicationScoped;
 
+import java.util.List;
+
+@ApplicationScoped
 public class ApplicationService {
 
     private final CustomerReadService customerReadService;
@@ -15,6 +19,10 @@ public class ApplicationService {
         this.profilePhotoCreateService = profilePhotoCreateService;
     }
 
+    public List<Customer> searchCustomers() {
+        return customerReadService.find().stream().map(customer -> Customer.fromDomain(customer)).toList();
+    }
+
     public application.dto.Customer getCustomer(String customerId) {
         return Customer.fromDomain(customerReadService.findById(customerId));
     }
@@ -22,4 +30,6 @@ public class ApplicationService {
     public void persistProfilePhoto(String customerId, ProfilePhoto dto) {
         profilePhotoCreateService.save(customerId, dto.toDomain());
     }
+
+
 }
