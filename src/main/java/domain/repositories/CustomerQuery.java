@@ -11,7 +11,7 @@ public class CustomerQuery {
         this.ids = ids;
     }
 
-    public Optional<Set<String>> getIds() {
+    public Optional<Set<String>> ids() {
         return ids;
     }
 
