@@ -1,15 +1,15 @@
 package domain.services;
 
 import domain.models.ProfilePhoto;
-import domain.repositories.ProfilePhotoRepository;
+import domain.repositories.ProfilePhotoPersistenceRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class ProfilePhotoCreateService {
 
-    private final ProfilePhotoRepository repository;
+    private final ProfilePhotoPersistenceRepository repository;
 
-    public ProfilePhotoCreateService(ProfilePhotoRepository repository) {
+    public ProfilePhotoCreateService(ProfilePhotoPersistenceRepository repository) {
         this.repository = repository;
     }
 
