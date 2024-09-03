@@ -1,19 +1,22 @@
 package domain.services;
 
 import domain.models.ProfilePhoto;
-import domain.repositories.ProfilePhotoPersistenceRepository;
+import domain.repositories.ProfilePhotoRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+
+import java.util.Map;
 
 @ApplicationScoped
 public class ProfilePhotoCreateService {
 
-    private final ProfilePhotoPersistenceRepository repository;
+    private final ProfilePhotoRepository repository;
 
-    public ProfilePhotoCreateService(ProfilePhotoPersistenceRepository repository) {
+    public ProfilePhotoCreateService(ProfilePhotoRepository repository) {
         this.repository = repository;
     }
 
     public void save(String customerId, ProfilePhoto profilePhoto) {
-        repository.save(customerId, profilePhoto);
+        repository.registerEntities(Map.of(customerId, profilePhoto));
+        repository.commit();
     }
 }
